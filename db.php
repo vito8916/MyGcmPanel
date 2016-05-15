@@ -542,7 +542,7 @@ class DB {
         $q = "SELECT * FROM users WHERE email='$email' AND app_type='$app' AND gcm_id='$gcm'";
         
         mysql_query($q) or die(mysql_error());
-        if (mysql_affected_rows() == 1) {
+        if (mysql_affected_rows() >= 1) {
             return true;
         } else {
             return false;
