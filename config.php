@@ -9,6 +9,6 @@ $USERNAME = "u160055481_vic89"; // Database name
 $PASSWORD = "vic891606"; // Username
 $DB = "u160055481_paper"; // Password
 
-define("GOOGLE_API_KEY", "AIzaSyA5K9hairXEL9S18i4Rqd-6b5CUYlS54OM"); // Google API key
+define("GOOGLE_API_KEY", "AIzaSyAfly0q7sCaf0ecnlBrGYpPOuz0OTeyBBA"); // Google API key
 
 ?>
