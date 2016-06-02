@@ -6,7 +6,7 @@
  */
 require 'db.php';
 $helper=new DB();
-if(isset($_REQUEST['email']) && isset($_REQUEST['app_type']) && isset($_REQUEST['gcm_id'])){
+if(isset($_REQUEST['email']) && isset($_REQUEST['app_type']) && isset($_REQUEST['gcm_id']) && isset($_REQUEST['is_active'])){
     if(!$helper->CheckUser($_REQUEST)){
         $r=$helper->AddUserGCM($_REQUEST);
     if($r){
@@ -14,6 +14,8 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['app_type']) && isset($_REQUEST[
     }else{
         echo json_encode(array('status'=>"FAIL"));
     }
+    }else if(!$helper->CheckStatus($_REQUEST)){
+        $r=$helper->UpdateStatus($_REQUEST);
     }
     
 }else if(!isset($_REQUEST['app_type'])){

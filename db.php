@@ -196,6 +196,8 @@ class DB {
 	 	echo "There is some problem please try again later";
 	 }
 	}
+    
+    
     public function GetUserByType_withCategories($type, $cat) {
         $wc = " ";
         if (!empty($cat)) {
@@ -499,7 +501,8 @@ class DB {
         $email = $data["email"];
         $app = $data["app_type"];
         $gcm = $data["gcm_id"];
-        $q = "INSERT INTO users (email,app_type,gcm_id) VALUES('$email','$app','$gcm')";
+        $is_active = $data["is_active"];
+        $q = "INSERT INTO users (email,app_type,gcm_id,is_active) VALUES('$email','$app','$gcm','$is_active')";
 
         $r = mysql_query($q) or die(mysql_error());
         if (!$r) {
@@ -547,6 +550,37 @@ class DB {
         } else {
             return false;
         }
+    }
+    
+    function CheckStatus($data){
+        $email = $data["email"];
+        $app = $data["app_type"];
+        $gcm = $data["gcm_id"];
+        $is_active = $data["is_active"];
+        $q = "SELECT * FROM users WHERE email='$email' AND app_type='$app' AND gcm_id='$gcm' AND is_active='$is_active'";
+         mysql_query($q) or die(mysql_error());
+        if (mysql_affected_rows() >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    function UpdateStatus($data){
+        $id = $data["uid"];
+        $email = $data["email"];
+        $app = $data["app_type"];
+        $gcm = $data["gcm_id"];
+        $is_active = $data["is_active"];
+        
+        $q = "UPDATE users SET is_active='$is_active' WHERE email='$email' AND app_type='$app' AND gcm_id='$gcm'";
+        $r = mysql_query($q) or die("Error Updating DB.");
+        if($r){
+	 	echo "Status actualizado!";
+	 }else{
+	 	echo "There is some problem with the status please try again later";
+	 }
+        
     }
 
 }
